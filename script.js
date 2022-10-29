@@ -1,56 +1,109 @@
-let bookDisplay = document.querySelector(".bookDisplay")
+let bookDisplay = document.querySelector(".bookDisplay");
+let addBookButton = document.querySelector(".addBookButton")
+let body = document.querySelector("body")
+let header = document.querySelector("header")
+let container = document.querySelector(".container")
 let bookAmount = 0;
-let bookRead = [true, true, false, false, false, false]
+let bookRead = []
 let buttons = []
-let LOFTR  = {
-    title: "LOTR",
-    author: "henk",
-    pages: 69,
-}
-let potter  = {
-    title: "Potter",
-    author: "Erika",
-    pages: 69,
-}
-let GVR  = {
-    title: "GVR",
-    author: "piet",
-    pages: 69,
-}
-let SenW  = {
-    title: "Suske en Wiske",
-    author: "jan",
-    pages: 69,
-}
-let Sent  = {
-    title: "Suske en Wiske",
-    author: "jan",
-    pages: 69,
-}
-let Seng  = {
-    title: "Suske en Wiske",
-    author: "jan",
-    pages: 69,
-}
 
-let myLibrary = [LOFTR, potter, GVR, SenW, Sent, Seng]
+
+let myLibrary = []
 
 
 function Book(title, author, pages, read) {
-
+    this.title = title
+    this.author = author
+    this.pages = pages
+    this.read = read
 }
 
-function addBookToLibrary() {
+function getUserBookInfo() {
+    let formPrompt = document.createElement("div")
+    formPrompt.classList.add("formPrompt")
+    bookDisplay.appendChild(formPrompt)
+
+    let formHeader = document.createElement("h2")
+    formHeader.innerText = "Add A Book To Your Library"
+    formPrompt.appendChild(formHeader)
+
+    let formTitle = document.createElement("input")
+    formTitle.classList.add("formTitle")
+    formTitle.placeholder = "Book Title:"
+    formPrompt.appendChild(formTitle)
+
+    let formAuthor = document.createElement("input")
+    formAuthor.classList.add("formAuthor")
+    formAuthor.placeholder = "Book Author:"
+    formPrompt.appendChild(formAuthor)
+
+    let formPages = document.createElement("input")
+    formPages.classList.add("pages")
+    formPages.placeholder = "Total Pages:"
+    formPrompt.appendChild(formPages)
+
+    let readDiv = document.createElement("div")
+    formPrompt.appendChild(readDiv)
+
+    let readLabel = document.createElement("label")
+    readLabel.for = "readCheckboxID"
+    readLabel.innerText = "Have you read the book?"
+    readDiv.appendChild(readLabel)
+
+    let readInput = document.createElement("input")
+    readInput.type = "checkbox"
+    readInput.id = "readCheckboxID"
+    readDiv.appendChild(readInput)
+
+    let formButtons = document.createElement("div")
+    formPrompt.appendChild(formButtons)
+
+    let submitButton = document.createElement("button")
+    submitButton.innerText = "Submit"
+    formButtons.appendChild(submitButton)
+
+    let returnButton = document.createElement("button")
+    returnButton.innerText = "Return"
+    formButtons.appendChild(returnButton)
+
+    submitButton.addEventListener("click", () => {
+        console.log(formTitle.value)
+        console.log(formAuthor.value)
+        console.log(formPages.value)
+        console.log(readInput.value)
+        addBookToLibrary(formTitle.value, formAuthor.value, formPages.value, readInput.value)
+    })
+
+    returnButton.addEventListener("click", () => {
+        displayBooks()
+    })
+    
+    
+
 
 }
-
+function addBookToLibrary(title, author, pages, read) {
+    removeBookDisplay()
+    myLibrary.push(new Book(title, author, pages, read)) 
+    displayBooks()
+}
+function removeBookDisplay() {
+    bookDisplay.remove()
+}
 function displayBooks() {
     let counter = 0;
     let bookDivs = [];
     let titleDivs = []
     let authorDivs = []
     let pagesDivs = []
-    
+
+    //remove old book display with all books
+
+    //add new book display with all books
+    bookDisplay = document.createElement("div")
+    bookDisplay.classList.add("bookDisplay")
+    container.appendChild(bookDisplay)
+
     myLibrary.forEach(item => {
         //create divs for the books
         bookDivs[counter] = document.createElement("div")
@@ -83,23 +136,22 @@ function displayBooks() {
             buttons[counter].innerText = "Book Not Read (yet)"
             buttons[counter].style.background = "red"
         }
-        
+
         bookDivs[counter].appendChild(buttons[counter])
 
-        
+
 
 
         counter++
     })
 }
 
-displayBooks()
-addBookToLibrary()
- 
- 
- 
- 
- 
-  //const thehobbit = new Book("The Hobbit", "J.R.R. Tolkien", "295", "not yet read")
-  //console.log(thehobbit.info())
-  
+
+addBookButton.addEventListener("click", () => {
+    getUserBookInfo()
+
+})
+
+
+
+
