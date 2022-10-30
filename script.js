@@ -18,8 +18,10 @@ function Book(title, author, pages, read) {
 function getUserBookInfo() {
     let formPrompt = document.createElement("div")
     formPrompt.classList.add("formPrompt")
-    bookDisplay.appendChild(formPrompt)
+    body.appendChild(formPrompt)
 
+    formPrompt.style.opacity = "1"
+    container.style.opacity = "0.3"
     let formHeader = document.createElement("h2")
     formHeader.innerText = "Add A Book To Your Library"
     formPrompt.appendChild(formHeader)
@@ -70,10 +72,13 @@ function getUserBookInfo() {
         console.log(formPages.value)
         console.log(readInput.checked)
         addBookToLibrary(formTitle.value, formAuthor.value, formPages.value, readInput.checked)
+        formPrompt.remove()
+        container.style.opacity = "1"
     })
 
     returnButton.addEventListener("click", () => {
-        displayBooks()
+        formPrompt.remove()
+        container.style.opacity = "1"
     })
 }
 
@@ -128,7 +133,7 @@ function displayBooks() {
 
         bookDivs[counter].appendChild(readButton)
         readButton.addEventListener("click", () => {
-            if (readButton.style.background == "green") {
+            if (item.read == true) {
                 item.read = false
                 readButton.innerText = "Book Not Read (yet)"
                 readButton.style.background = "red"
@@ -152,13 +157,16 @@ addBookButton.addEventListener("click", () => {
 
 })
 function clearLibrary() {
+    bookDisplay.remove()
     myLibrary.length = 0
     displayBooks()
 }
 function createClearLibraryWarning () {
+
+    container.style.opacity = "0.3"
     let warningPrompt = document.createElement("div")
     warningPrompt.classList.add("warningPrompt")
-    bookDisplay.appendChild(warningPrompt)
+    body.appendChild(warningPrompt)
 
     let warningMessage = document.createElement("h2")
     warningMessage.innerText = "Are you sure you want to clear your library?"
@@ -176,9 +184,11 @@ function createClearLibraryWarning () {
 
     yesButton.addEventListener("click", () => {
         clearLibrary()
+        container.style.opacity = "1"
         warningPrompt.remove()
     })
     noButton.addEventListener("click", () => {
+        container.style.opacity = "1"
         warningPrompt.remove()
     })
 }
