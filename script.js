@@ -56,6 +56,7 @@ function getUserBookInfo() {
     readDiv.appendChild(readInput)
 
     let formButtons = document.createElement("div")
+    formButtons.classList.add("formButtons")
     formPrompt.appendChild(formButtons)
 
     let submitButton = document.createElement("button")
@@ -70,8 +71,8 @@ function getUserBookInfo() {
         console.log(formTitle.value)
         console.log(formAuthor.value)
         console.log(formPages.value)
-        console.log(readInput.value)
-        addBookToLibrary(formTitle.value, formAuthor.value, formPages.value, readInput.value)
+        console.log(readInput.checked)
+        addBookToLibrary(formTitle.value, formAuthor.value, formPages.value, readInput.checked)
     })
 
     returnButton.addEventListener("click", () => {
@@ -129,8 +130,8 @@ function displayBooks() {
 
         buttons[counter] = document.createElement("button")
         buttons[counter].classList.add(`read${counter}`, "read")
-        if (bookRead[counter] === true) {
-            buttons[counter].innerText = "Book Read, Wel Done!"
+        if (item.read === true) {
+            buttons[counter].innerText = "Book Read, Well Done!"
             buttons[counter].style.background = "green"
         } else {
             buttons[counter].innerText = "Book Not Read (yet)"
@@ -139,7 +140,7 @@ function displayBooks() {
 
         bookDivs[counter].appendChild(buttons[counter])
 
-
+        
 
 
         counter++
