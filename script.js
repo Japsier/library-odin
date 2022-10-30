@@ -3,7 +3,6 @@ let addBookButton = document.querySelector(".addBookButton")
 let body = document.querySelector("body")
 let header = document.querySelector("header")
 let container = document.querySelector(".container")
-//let buttons = []
 
 
 let myLibrary = []
@@ -76,11 +75,8 @@ function getUserBookInfo() {
     returnButton.addEventListener("click", () => {
         displayBooks()
     })
-    
-    
-
-
 }
+
 function addBookToLibrary(title, author, pages, read) {
     removeBookDisplay()
     myLibrary.push(new Book(title, author, pages, read)) 
@@ -131,6 +127,17 @@ function displayBooks() {
         }
 
         bookDivs[counter].appendChild(readButton)
+        readButton.addEventListener("click", () => {
+            if (readButton.style.background == "green") {
+                item.read = false
+                readButton.innerText = "Book Not Read (yet)"
+                readButton.style.background = "red"
+            } else {
+                item.read = true
+                readButton.innerText = "Book Read, Well Done!"
+                readButton.style.background = "green"
+            }
+        }) 
 
         
 
@@ -143,6 +150,40 @@ function displayBooks() {
 addBookButton.addEventListener("click", () => {
     getUserBookInfo()
 
+})
+function clearLibrary() {
+    myLibrary.length = 0
+    displayBooks()
+}
+function createClearLibraryWarning () {
+    let warningPrompt = document.createElement("div")
+    warningPrompt.classList.add("warningPrompt")
+    bookDisplay.appendChild(warningPrompt)
+
+    let warningMessage = document.createElement("h2")
+    warningMessage.innerText = "Are you sure you want to clear your library?"
+    warningPrompt.appendChild(warningMessage)
+
+    let yesButton = document.createElement("button")
+    yesButton.classList.add("yesButton")
+    yesButton.innerText = "yes"
+    warningPrompt.appendChild(yesButton)
+
+    let noButton = document.createElement("button")
+    noButton.classList.add("noButton")
+    noButton.innerText = "No"
+    warningPrompt.appendChild(noButton)
+
+    yesButton.addEventListener("click", () => {
+        clearLibrary()
+        warningPrompt.remove()
+    })
+    noButton.addEventListener("click", () => {
+        warningPrompt.remove()
+    })
+}
+document.querySelector(".clearButton").addEventListener("click", () => {
+    createClearLibraryWarning ()
 })
 
 

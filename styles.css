@@ -77,7 +77,7 @@ header {
     display: flex;
     gap: 20px;
 }
-.headerButtons > button {
+.headerButtons > button, .warningPrompt > button {
 
   appearance: button;
   backface-visibility: hidden;
@@ -111,12 +111,10 @@ header {
   cursor: default;
 }
 
-.headerButtons > button:focus {
+.headerButtons > button:focus , .warningPrompt > button:focus {
   box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
 }
-
-.formPrompt {
-    position: absolute;
+.formPrompt, .warningPrompt {
     justify-self: center;
     align-self: center;
     height: 400px;
@@ -124,14 +122,27 @@ header {
     background-color: #94a3b8;
     border-radius: 4px;
     border:2px solid #134e4a;
+}
+.formPrompt {
+    position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     opacity: 1;
-    gap: 20px;
-    
+    gap: 20px; 
 }
+.warningPrompt {
+    box-sizing: border-box;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 50px;
+}
+
 
 .formPrompt > input {
     height: 20px;
