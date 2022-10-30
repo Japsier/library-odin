@@ -30,8 +30,8 @@ header {
     grid-area: 2 / 1 / 3 / 2;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr) );
-    grid-template-rows: repeat(auto-fill, minmax(300px, 1fr) );
-    gap: 10px;
+    grid-auto-rows: clamp(200px, 300px, 500px);
+    gap: 20px;
     justify-content: center;
 
 }
@@ -108,8 +108,8 @@ header {
   width: 50%;
 }
 
-.headerButtons > button:disabled {
-  cursor: default;
+.headerButtons > button:hover, .warningPrompt > button:hover  {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
 .headerButtons > button:focus , .warningPrompt > button:focus {
