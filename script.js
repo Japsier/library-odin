@@ -3,9 +3,7 @@ let addBookButton = document.querySelector(".addBookButton")
 let body = document.querySelector("body")
 let header = document.querySelector("header")
 let container = document.querySelector(".container")
-let bookAmount = 0;
-let bookRead = []
-let buttons = []
+//let buttons = []
 
 
 let myLibrary = []
@@ -94,12 +92,6 @@ function removeBookDisplay() {
 function displayBooks() {
     let counter = 0;
     let bookDivs = [];
-    let titleDivs = []
-    let authorDivs = []
-    let pagesDivs = []
-
-    //remove old book display with all books
-
     //add new book display with all books
     bookDisplay = document.createElement("div")
     bookDisplay.classList.add("bookDisplay")
@@ -113,32 +105,32 @@ function displayBooks() {
 
 
         //create divs for all properties of the books
-        titleDivs[counter] = document.createElement("div")
-        titleDivs[counter].classList.add(`title${counter}`, "title")
-        titleDivs[counter].innerText = item.title
-        bookDivs[counter].appendChild(titleDivs[counter])
+        let bookTitle = document.createElement("div")
+        bookTitle.classList.add(`title${counter}`, "title")
+        bookTitle.innerText = item.title
+        bookDivs[counter].appendChild(bookTitle)
 
-        authorDivs[counter] = document.createElement("div")
-        authorDivs[counter].classList.add(`author${counter}`, "author")
-        authorDivs[counter].innerText = `Author: ${item.author}`
-        bookDivs[counter].appendChild(authorDivs[counter])
+        let bookAuthor = document.createElement("div")
+        bookAuthor.classList.add(`author${counter}`, "author")
+        bookAuthor.innerText = `Author: ${item.author}`
+        bookDivs[counter].appendChild(bookAuthor)
 
-        pagesDivs[counter] = document.createElement("div")
-        pagesDivs[counter].classList.add(`pages${counter}`, "pages")
-        pagesDivs[counter].innerText = `Pages : ${item.pages}`
-        bookDivs[counter].appendChild(pagesDivs[counter])
+        let bookPages = document.createElement("div")
+        bookPages.classList.add(`pages${counter}`, "pages")
+        bookPages.innerText = `Pages : ${item.pages}`
+        bookDivs[counter].appendChild(bookPages)
 
-        buttons[counter] = document.createElement("button")
-        buttons[counter].classList.add(`read${counter}`, "read")
+        let readButton = document.createElement("button")
+        readButton.classList.add(`read${counter}`, "read")
         if (item.read === true) {
-            buttons[counter].innerText = "Book Read, Well Done!"
-            buttons[counter].style.background = "green"
+            readButton.innerText = "Book Read, Well Done!"
+            readButton.style.background = "green"
         } else {
-            buttons[counter].innerText = "Book Not Read (yet)"
-            buttons[counter].style.background = "red"
+            readButton.innerText = "Book Not Read (yet)"
+            readButton.style.background = "red"
         }
 
-        bookDivs[counter].appendChild(buttons[counter])
+        bookDivs[counter].appendChild(readButton)
 
         
 
