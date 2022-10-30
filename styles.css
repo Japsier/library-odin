@@ -36,6 +36,7 @@ header {
 
 }
 .book {
+    position: relative;
     font-size: 1.2rem;
     padding: 25px;
     background-color: #14b8a6;
@@ -64,7 +65,17 @@ header {
     grid-area: 4 / 1 / 5 / 2;
     margin-top: 10px;
 }
-
+.book > .removeBookButton {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    border-radius: 50%;
+    background-color: #14b8a6;
+    border: 0px;
+}
+.book > .removeBookButton:hover {
+    cursor: pointer;
+}
 .read {
     border: 0px solid black;
     border-radius: 10px;

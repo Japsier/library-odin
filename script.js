@@ -121,6 +121,17 @@ function displayBooks() {
         bookPages.innerText = `Pages : ${item.pages}`
         bookDivs[counter].appendChild(bookPages)
 
+        let removeBookButton = document.createElement("button")
+        removeBookButton.classList.add("removeBookButton")
+        removeBookButton.innerText = "X"
+        bookDivs[counter].appendChild(removeBookButton)
+        removeBookButton.addEventListener("click", () => {
+            myLibrary.splice(myLibrary.indexOf(item), 1)
+            console.log()
+            bookDisplay.remove()
+            displayBooks()
+        })
+
         let readButton = document.createElement("button")
         readButton.classList.add(`read${counter}`, "read")
         if (item.read === true) {
